@@ -1,0 +1,11 @@
+If you mistakenly added a sensitive files in a folder, use this script.
+No guarantee to work. It may break you git at all. Be careful.
+
+git filter-branch -f --tree-filter 'rm -rf folder-name/' -- --all
+
+git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
+git reflog expire --expire=now --all
+git gc --prune=now
+
+git push origin --force --all
+git push origin --force --tags
