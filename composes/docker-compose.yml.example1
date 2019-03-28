@@ -1,0 +1,79 @@
+version: "3.4"
+# this example uses host network instead of bridge.
+# Keep in mind that you have to manually open the port in the host
+
+services:
+# ----------- samba begin ----------- #
+  samba:
+    build:
+      context: ./build/
+      network: host
+      args:
+        - version=${version}
+        - PYTHON=${PYTHON:-python2}
+        - http_proxy=${HTTP_PROXY}
+        - https_proxy=${HTTPS_PROXY}
+        - ftp_proxy=${FTP_PROXY}
+        - no_proxy=${NO_PROXY}
+    container_name: ${NAME}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./samba/backup:/backup
+      - ./samba/keys:/keys
+      - ./samba/config:/etc/samba/
+      - ./samba/data:/var/lib/samba
+    secrets:
+      - AdminPassSecret
+    environment:
+      - http_proxy=${HTTP_PROXY}
+      - https_proxy=${HTTPS_PROXY}
+      - ftp_proxy=${FTP_PROXY}
+      - no_proxy=${NO_PROXY}
+      - netbios=${NETBIOS}
+      - domain=${DOMAIN}
+      - dnslist=${DNSLIST}
+      - country=${COUNTRY}
+      - state=${STATE}
+      - city=${CITY}
+      - company=${COMPANY}
+      - certdays=${CERTDAYS}
+      - department=${DEPARTMENT}
+      - ip=${IP}
+      - mykey=${MYKEY}
+      - mycert=${MYCERT}
+    network_mode: "host"
+    dns:
+      - 127.0.0.1 # use local dns
+# if dns_search is uncommented, from windows, we cant join by ${NETBIOS}.${DOMAIN}. not sure this is unique to my environment.
+#    dns_search:
+#      - ${NETBIOS}.${DOMAIN}
+#      uncomment these to add other dns search
+#      - ${search1}
+#      - ${search2}
+#      - ${search3}
+#      - ${search4}
+#      - ${search5}
+#      - ${search6}
+# note: docker process from the top.
+    dns:
+# this should be not required if dns forwarding works properly
+#      - ${DNS1}
+#      - ${DNS2}
+#      - ${DNS3}
+#      - ${DNS4}
+    extra_hosts:
+      - ${NETBIOS}.${DOMAIN}:${IP}
+      - ${DOMAIN}:${IP}
+      - ${NETBIOS}:${IP}
+    hostname: ${HOSTNAME}
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    privileged: true
+    restart: always
+
+secrets:
+  AdminPassSecret:
+    file: ./AdminPassSecret
+# ----------- samba end ----------- #

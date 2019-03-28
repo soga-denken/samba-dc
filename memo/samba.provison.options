@@ -1,0 +1,67 @@
+# samba-tool domain provision -h
+Usage: samba-tool domain provision [options]
+
+Provision a domain.
+
+
+Options:
+  -h, --help            show this help message and exit
+  --interactive         Ask for names
+  --domain=DOMAIN       NetBIOS domain name to use
+  --domain-guid=GUID    set domainguid (otherwise random)
+  --domain-sid=SID      set domainsid (otherwise random)
+  --ntds-guid=GUID      set NTDS object GUID (otherwise random)
+  --invocationid=GUID   set invocationid (otherwise random)
+  --host-name=HOSTNAME  set hostname
+  --host-ip=IPADDRESS   set IPv4 ipaddress
+  --host-ip6=IP6ADDRESS
+                        set IPv6 ipaddress
+  --site=SITENAME       set site name
+  --adminpass=PASSWORD  choose admin password (otherwise random)
+  --krbtgtpass=PASSWORD
+                        choose krbtgt password (otherwise random)
+  --dns-backend=NAMESERVER-BACKEND
+                        The DNS server backend. SAMBA_INTERNAL is the builtin
+                        name server (default), BIND9_FLATFILE uses bind9 text
+                        database to store zone information, BIND9_DLZ uses
+                        samba4 AD to store zone information, NONE skips the
+                        DNS setup entirely (not recommended)
+  --dnspass=PASSWORD    choose dns password (otherwise random)
+  --root=USERNAME       choose 'root' unix username
+  --nobody=USERNAME     choose 'nobody' user
+  --users=GROUPNAME     choose 'users' group
+  --blank               do not add users or groups, just the structure
+  --server-role=ROLE    The server role (domain controller | dc | member
+                        server | member | standalone). Default is dc.
+  --function-level=FOR-FUN-LEVEL
+                        The domain and forest function level (2000 | 2003 |
+                        2008 | 2008_R2 - always native). Default is (Windows)
+                        2008_R2 Native.
+  --base-schema=BASE-SCHEMA
+                        The base schema files to use. Default is (Windows)
+                        2008_R2.
+  --next-rid=NEXTRID    The initial nextRid value (only needed for upgrades).
+                        Default is 1000.
+  --partitions-only     Configure Samba's partitions, but do not modify them
+                        (ie, join a BDC)
+  --use-rfc2307         Use AD to store posix attributes (default = no)
+  --machinepass=PASSWORD
+                        choose machine password (otherwise random)
+  --plaintext-secrets   Store secret/sensitive values as plain text on
+                        disk(default is to encrypt secret/ensitive values)
+  --backend-store=BACKENDSTORE
+                        Specify the database backend to be used (default is
+                        tdb)
+  --targetdir=DIR       Set target directory (where to store provision)
+  -q, --quiet           Be quiet
+
+  Samba Common Options:
+    -s FILE, --configfile=FILE
+                        Configuration file
+    -d DEBUGLEVEL, --debuglevel=DEBUGLEVEL
+                        debug level
+    --option=OPTION     set smb.conf option from command line
+    --realm=REALM       set the realm name
+
+  Version Options:
+    -V, --version       Display version number

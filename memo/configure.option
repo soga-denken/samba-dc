@@ -1,0 +1,474 @@
+
+# generated with samba4.10.0
+./configure -h
+waf [commands] [options]
+
+Main commands (example: ./waf build -j4)
+  build       : build all targets
+  clean       : cleans the project
+  configure   : configures the project
+  ctags       : build 'tags' file using ctags
+  dist        : makes a tarball for distribution
+  distcheck   : test that distribution tarball builds and installs
+  distclean   : removes build folders and data
+  etags       : build TAGS file using etags
+  install     : installs the targets on the system
+  list        : lists the targets to execute
+  pep8        : run pep8 validator
+  pydoctor    : build python apidocs
+  reconfigure : reconfigure if config scripts have changed
+  step        : executes tasks in a step-by-step fashion, for debugging
+  test        : Run the test suite (see test options below)
+  testonly    : run tests without doing a build first
+  uninstall   : removes the targets installed
+  wafdocs     : build wafsamba apidocs
+  wildcard_cmd: called on a unknown command
+
+Options:
+  --version
+            show program's version number and exit
+  -c COLORS, --color=COLORS
+            whether to use colors (yes/no/auto) [default: auto]
+  -j JOBS, --jobs=JOBS
+            amount of parallel jobs (1)
+  -k, --keep
+            continue despite errors (-kk to try harder)
+  -v, --verbose
+            verbosity level -v -vv or -vvv [default: 0]
+  --zones=ZONES
+            debugging zones (task_gen, deps, tasks, etc)
+  -h, --help
+            show this help message and exit
+  --with-libiconv=ICONV_OPEN
+            additional directory to search for libiconv
+  --without-gettext
+            Disable use of gettext
+  --disable-python
+            do not generate python modules
+  --extra-python=PYTHON
+            build selected libraries for the specified additional version of Python (example: --extra-
+            python=/usr/bin/python3)
+  --disable-tdb-mutex-locking
+            Disable the use of pthread robust mutexes
+  --without-ldb-lmdb
+            disable new LMDB backend for LDB
+  --enable-selftest
+            enable options necessary for selftest (default=no)
+  --enable-coverage
+            enable options necessary for code coverage reporting on selftest (default=no)
+  --with-selftest-prefix=SELFTEST_PREFIX
+            specify location of selftest directory (default=./st)
+  --enable-gnutls
+            Enable use of gnutls
+  --with-gpgme
+            Build with gpgme support (default=auto). This requires gpgme devel and python packages (e.g.
+            libgpgme11-dev, python-gpgme on debian/ubuntu).
+  --with-static-modules=STATIC_MODULES
+            Comma-separated list of names of modules to statically link in. May include !module to
+            disable 'module'. Can be '!FORCED' to disable all non-required static only modules. Can be
+            '!DEFAULT' to disable all modules defaulting to a static build. Can be 'ALL' to build all
+            default shared modules static. The most specific one wins, while the order is ignored and
+            --with-static-modules is evaluated before --with-shared-modules
+  --with-shared-modules=SHARED_MODULES
+            Comma-separated list of names of modules to build shared. May include !module to disable
+            'module'. Can be '!FORCED' to disable all non-required shared only modules. Can be '!DEFAULT'
+            to disable all modules defaulting to a shared build. Can be 'ALL' to build all default static
+            modules shared. The most specific one wins, while the order is ignored and --with-static-
+            modules is evaluated before --with-shared-modules
+  --with-winbind
+            Build with winbind support (default=yes)
+  --with-ads
+            Build with ads support (default=yes)
+  --with-ldap
+            Build with ldap support (default=yes)
+  --enable-cups
+            Build with cups support (default=yes)
+  --enable-iprint
+            Build with iprint support (default=yes)
+  --with-pam
+            Build with pam support (default=yes)
+  --with-quotas
+            Build with quotas support (default=yes)
+  --with-sendfile-support
+            Build with sendfile-support support (default=auto)
+  --with-utmp
+            Build with utmp support (default=yes)
+  --enable-avahi
+            Build with avahi support (default=yes)
+  --with-iconv
+            Build with iconv support (default=yes)
+  --with-acl-support
+            Build with acl-support support (default=yes)
+  --with-dnsupdate
+            Build with dnsupdate support (default=yes)
+  --with-syslog
+            Build with syslog support (default=yes)
+  --with-automount
+            Build with automount support (default=yes)
+  --with-dmapi
+            Build with dmapi support (default=auto)
+  --with-fam
+            Build with fam support (default=auto)
+  --with-profiling-data
+            Build with profiling-data support (default=no)
+  --with-libarchive
+            Build with libarchive support (default=yes)
+  --with-cluster-support
+            Build with cluster-support support (default=no)
+  --with-regedit
+            Build with regedit support (default=auto)
+  --with-fake-kaserver
+            Include AFS fake-kaserver support
+  --enable-glusterfs
+            Build with glusterfs support (default=yes)
+  --enable-cephfs
+            Build with cephfs support (default=yes)
+  --enable-vxfs
+            enable support for VxFS (default=no)
+  --enable-spotlight
+            Build with spotlight support (default=no)
+  --disable-fault-handling
+            disable the fault handlers
+  --with-systemd
+            Enable systemd integration
+  --without-systemd
+            Disable systemd integration
+  --with-lttng
+            Enable lttng integration
+  --without-lttng
+            Disable lttng integration
+  --with-gpfs=GPFS_HEADERS_DIR
+            Directory under which gpfs headers are installed
+  --accel-aes=ACCEL_AES
+            Should we use accelerated AES crypto functions. Options are intelaesni|none.
+  --enable-infiniband
+            Turn on infiniband support (default=no)
+  --enable-pmda
+            Turn on PCP pmda support (default=no)
+  --enable-etcd-reclock
+            Enable etcd recovery lock helper (default=no)
+  --with-libcephfs=LIBCEPHFS_DIR
+            Directory under which libcephfs is installed
+  --enable-ceph-reclock
+            Enable Ceph CTDB recovery lock helper (default=no)
+  --with-logdir=CTDB_LOGDIR
+            Path to log directory
+  --with-socketpath=CTDB_SOCKPATH
+            path to CTDB daemon socket
+  --enable-pthreadpool
+            Build with pthreadpool support (default=yes)
+  --with-system-mitkrb5
+            build Samba with system MIT Kerberos. You may specify list of paths where Kerberos is
+            installed (e.g. /usr/local /usr/kerberos) to search krb5-config
+  --with-experimental-mit-ad-dc
+            Enable the experimental MIT Kerberos-backed AD DC.  Note that security patches are not issued
+            for this configuration
+  --with-system-mitkdc=WITH_SYSTEM_MITKDC
+            Specify the path to the krb5kdc binary from MIT Kerberos
+  --with-system-heimdalkrb5
+            conflicts with --with-system-mitkrb5
+  --without-ad-dc
+            disable AD DC functionality (enables only Samba FS (File Server, Winbind, NMBD) and client
+            utilities.
+  --with-ntvfs-fileserver
+            enable the deprecated NTVFS file server from the original Samba4 branch (default if --enable-
+            selftest specified).  Conflicts with --with-system-mitkrb5 and --without-ad-dc
+  --without-ntvfs-fileserver
+            disable the deprecated NTVFS file server from the original Samba4 branch
+  --with-pie
+            Build Position Independent Executables (default if supported by compiler)
+  --without-pie
+            Disable Position Independent Executable builds
+  --with-relro
+            Build with full RELocation Read-Only (RELRO)(default if supported by compiler)
+  --without-relro
+            Disable RELRO builds
+  --with-json
+            Build with JSON support (default=True). This requires the jansson development headers.
+  --without-json
+            Build without JSON support.
+
+  Configuration options:
+    -o OUT, --out=OUT
+            build dir for the project
+    -t TOP, --top=TOP
+            src dir for the project
+    --check-c-compiler=CHECK_C_COMPILER
+            list of C compilers to try [gcc clang icc generic_cc]
+
+  Build and installation options:
+    -p, --progress
+            -p: progress bar; -pp: ide output
+    --targets=TARGETS
+            task generators, e.g. "target1,target2"
+
+  Step options:
+    --files=FILES
+            files to process, by regexp, e.g. "*/main.c,*/test/main.o"
+
+  Installation and uninstallation options:
+    -f, --force
+            force file installation
+    --distcheck-args=ARGS
+            arguments to pass to distcheck
+
+  Installation prefix:
+    By default, "waf install" will put the files in "/usr/local/bin", "/usr/local/lib" etc. An
+    installation prefix other than "/usr/local" can be given using "--prefix", for example "--
+    prefix=$HOME"
+
+    --prefix=PREFIX
+            installation prefix [default: '/usr/local/samba']
+    --destdir=DESTDIR
+            installation root [default: '']
+    --exec-prefix=EXEC_PREFIX
+            installation prefix for binaries [PREFIX]
+
+  Installation directories:
+    --bindir=BINDIR
+            user commands [EXEC_PREFIX/bin]
+    --sbindir=SBINDIR
+            system binaries [EXEC_PREFIX/sbin]
+    --libexecdir=LIBEXECDIR
+            program-specific binaries [EXEC_PREFIX/libexec]
+    --sysconfdir=SYSCONFDIR
+            host-specific configuration [PREFIX/etc]
+    --sharedstatedir=SHAREDSTATEDIR
+            architecture-independent variable data [PREFIX/com]
+    --localstatedir=LOCALSTATEDIR
+            variable data [PREFIX/var]
+    --libdir=LIBDIR
+            object code libraries [EXEC_PREFIX/lib]
+    --includedir=INCLUDEDIR
+            header files [PREFIX/include]
+    --oldincludedir=OLDINCLUDEDIR
+            header files for non-GCC compilers [/usr/include]
+    --datarootdir=DATAROOTDIR
+            architecture-independent data root [PREFIX/share]
+    --datadir=DATADIR
+            architecture-independent data [DATAROOTDIR]
+    --infodir=INFODIR
+            GNU "info" documentation [DATAROOTDIR/info]
+    --localedir=LOCALEDIR
+            locale-dependent data [DATAROOTDIR/locale]
+    --mandir=MANDIR
+            manual pages [DATAROOTDIR/man]
+    --docdir=DOCDIR
+            documentation root [DATAROOTDIR/doc/PACKAGE]
+    --htmldir=HTMLDIR
+            HTML documentation [DOCDIR]
+    --dvidir=DVIDIR
+            DVI documentation [DOCDIR]
+    --pdfdir=PDFDIR
+            PDF documentation [DOCDIR]
+    --psdir=PSDIR
+            PostScript documentation [DOCDIR]
+
+  library handling options:
+    --bundled-libraries=BUNDLED_LIBS
+            comma separated list of bundled libraries. May include !LIBNAME to disable bundling a
+            library. Can be 'NONE' or 'ALL' [auto]
+    --private-libraries=PRIVATE_LIBS
+            comma separated list of normally public libraries to build instead as private libraries. May
+            include !LIBNAME to disable making a library private. Can be 'NONE' or 'ALL' [auto]
+    --private-library-extension=PRIVATE_EXTENSION
+            name extension for private libraries [samba4]
+    --private-extension-exception=PRIVATE_EXTENSION_EXCEPTION
+            comma separated list of libraries to not apply extension to []
+    --builtin-libraries=BUILTIN_LIBRARIES
+            command separated list of libraries to build directly into binaries [NONE]
+    --minimum-library-version=MINIMUM_LIBRARY_VERSION
+            list of minimum system library versions (LIBNAME1:version,LIBNAME2:version)
+    --disable-rpath
+            Disable use of rpath for build binaries
+    --disable-rpath-install
+            Disable use of rpath for library path in installed files
+    --disable-rpath-private-install
+            Disable use of rpath for private library path in installed files
+    --nonshared-binary=NONSHARED_BINARIES
+            Disable use of shared libs for the listed binaries
+    --disable-symbol-versions
+            Disable use of the --version-script linker option
+
+  developer options:
+    -C      enable configure cacheing
+    --enable-auto-reconfigure
+            enable automatic reconfigure on build
+    --enable-debug
+            Turn on debugging symbols
+    --enable-developer
+            Turn on developer warnings and debugging
+    --picky-developer
+            Treat all warnings as errors (enable -Werror)
+    --fatal-errors
+            Stop compilation on first error (enable -Wfatal-errors)
+    --enable-gccdeps
+            Enable use of gcc -MD dependency module
+    --pedantic
+            Enable even more compiler warnings
+    --git-local-changes
+            mark version with + if local git changes
+    --address-sanitizer
+            Enable address sanitizer compile and linker flags
+    --abi-check
+            Check ABI signatures for libraries
+    --abi-check-disable
+            Disable ABI checking (used with --enable-developer)
+    --abi-update
+            Update ABI signature files for libraries
+    --show-deps=SHOWDEPS
+            Show dependency tree for the given target
+    --symbol-check
+            check symbols in object files against project rules
+    --dup-symbol-check
+            check for duplicate symbols in object files and system libs (must be configured with
+            --enable-developer)
+    --why-needed=WHYNEEDED
+            TARGET:DEPENDENCY check why TARGET needs DEPENDENCY
+    --show-duplicates
+            Show objects which are included in multiple binaries or libraries
+
+  cross compilation options:
+    --cross-compile
+            configure for cross-compilation
+    --cross-execute=CROSS_EXECUTE
+            command prefix to use for cross-execution in configure
+    --cross-answers=CROSS_ANSWERS
+            answers to cross-compilation configuration (auto modified)
+    --hostcc=HOSTCC
+            set host compiler when cross compiling
+
+  dist options:
+    --sign-release
+            sign the release tarball created by waf dist
+    --tag=TAG_RELEASE
+            tag release in git at the same time
+
+  Samba-specific directory layout:
+    --enable-fhs
+            Use FHS-compliant paths (default no)
+            You should consider using this together with:
+            --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+    --with-privatelibdir=PRIVATELIBDIR
+            Which directory to use for private Samba libraries
+            [STD-Default: ${LIBDIR}/private]
+            [FHS-Default: ${LIBDIR}/samba]
+    --with-modulesdir=MODULESDIR
+            Which directory to use for Samba modules
+            [STD-Default: ${LIBDIR}]
+            [FHS-Default: ${LIBDIR}/samba]
+    --with-pammodulesdir=PAMMODULESDIR
+            Which directory to use for PAM modules
+            [STD-Default: ${LIBDIR}/security]
+            [FHS-Default: ${LIBDIR}/security]
+    --with-configdir=CONFIGDIR
+            Where to put configuration files
+            [STD-Default: ${SYSCONFDIR}]
+            [FHS-Default: ${SYSCONFDIR}/samba]
+    --with-privatedir=PRIVATE_DIR
+            Where to put sam.ldb and other private files
+            [STD-Default: ${PREFIX}/private]
+            [FHS-Default: ${LOCALSTATEDIR}/lib/samba/private]
+    --with-bind-dns-dir=BINDDNS_DIR
+            bind-dns config directory
+            [STD-Default: ${PREFIX}/bind-dns]
+            [FHS-Default: ${LOCALSTATEDIR}/lib/samba/bind-dns]
+    --with-lockdir=LOCKDIR
+            Where to put short term disposable state files
+            [STD-Default: ${LOCALSTATEDIR}/lock]
+            [FHS-Default: ${LOCALSTATEDIR}/lock/samba]
+    --with-piddir=PIDDIR
+            Where to put pid files
+            [STD-Default: ${LOCALSTATEDIR}/run]
+            [FHS-Default: ${LOCALSTATEDIR}/run/samba]
+    --with-statedir=STATEDIR
+            Where to put persistent state files
+            [STD-Default: ${LOCALSTATEDIR}/locks]
+            [FHS-Default: ${LOCALSTATEDIR}/lib/samba]
+    --with-cachedir=CACHEDIR
+            Where to put temporary cache files
+            [STD-Default: ${LOCALSTATEDIR}/cache]
+            [FHS-Default: ${LOCALSTATEDIR}/cache/samba]
+    --with-logfilebase=LOGFILEBASE
+            Where to put log files
+            [STD-Default: ${LOCALSTATEDIR}]
+            [FHS-Default: ${LOCALSTATEDIR}/log/samba]
+    --with-sockets-dir=SOCKET_DIR
+            socket directory
+            [STD-Default: ${LOCALSTATEDIR}/run]
+            [FHS-Default: ${LOCALSTATEDIR}/run/samba]
+    --with-privileged-socket-dir=PRIVILEGED_SOCKET_DIR
+            privileged socket directory
+            [STD-Default: ${LOCALSTATEDIR}/lib]
+            [FHS-Default: ${LOCALSTATEDIR}/lib/samba]
+    --with-smbpasswd-file=SMB_PASSWD_FILE
+            Where to put the smbpasswd file
+            [STD-Default: ${PRIVATE_DIR}/smbpasswd]
+            [FHS-Default: ${PRIVATE_DIR}/smbpasswd]
+
+  systemd installation options:
+    --systemd-install-services
+            install systemd service files to manage daemons (default=no)
+    --with-systemddir=SYSTEMDDIR
+            systemd service directory [PREFIX/lib/systemd/system]
+    --systemd-smb-extra=Option=Value
+            Extra directives added to the smb service file. Can be given multiple times.
+    --systemd-nmb-extra=Option=Value
+            Extra directives added to the nmb service file. Can be used multiple times.
+    --systemd-winbind-extra=Option=Value
+            Extra directives added to the winbind service file. Can be used multiple times.
+    --systemd-samba-extra=Option=Value
+            Extra directives added to the samba service file. Can be used multiple times.
+
+  Python Options:
+    --nopyc
+            Do not install bytecode compiled .pyc files (configuration) [Default:install]
+    --nopyo
+            Do not install optimised compiled .pyo files (configuration) [Default:install]
+    --nopycache
+            Do not use __pycache__ directory to install objects [Default:auto]
+    --python=PYTHON
+            python binary to be used [Default: /usr/bin/python3]
+    --pythondir=PYTHONDIR
+            Installation path for python modules (py, platform-independent .py and .pyc files)
+    --pythonarchdir=PYTHONARCHDIR
+            Installation path for python extension (pyext, platform-dependent .so or .dylib files)
+
+  test options:
+    --load-list=LOAD_LIST
+            Load a test id list from a text file
+    --list  List available tests
+    --tests=TESTS
+            wildcard pattern of tests to run
+    --filtered-subunit
+            output (xfail) filtered subunit
+    --quick
+            enable only quick tests
+    --slow  enable the really slow tests
+    --nb-slowest=NB_SLOWEST
+            Show the n slowest tests (default=10)
+    --testenv
+            start a terminal with the test environment setup
+    --valgrind
+            use valgrind on client programs in the tests
+    --valgrind-log=VALGRINDLOG
+            where to put the valgrind log
+    --valgrind-server
+            use valgrind on the server in the tests (opens an xterm)
+    --screen
+            run the samba servers in screen sessions
+    --gdbtest
+            run the servers within a gdb window
+    --fail-immediately
+            stop tests on first failure
+    --socket-wrapper-pcap
+            create a pcap file for each failing test
+    --socket-wrapper-keep-pcap
+            create a pcap file for all individual test
+    --random-order
+            Run testsuites in random order
+    --perf-test
+            run performance tests only
+    --test-list=TEST_LIST
+            use tests listed here, not defaults (--test-list='FOO|' will execute FOO; --test-list='FOO'
+            will read it)

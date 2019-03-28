@@ -1,0 +1,28 @@
+# samba-tool domain backup offline -h
+Usage: samba-tool domain backup offline [options]
+
+Backup the local domain directories safely into a tar file.
+
+Takes a backup copy of the current domain from the local files on disk,
+with proper locking of the DB to ensure consistency. If the domain were to
+undergo a catastrophic failure, then the backup file can be used to recover
+the domain.
+
+An offline backup differs to an online backup in the following ways:
+- a backup can be created even if the DC isn't currently running.
+- includes non-replicated attributes that an online backup wouldn't store.
+- takes a copy of the raw database files, which has the risk that any
+  hidden problems in the DB are preserved in the backup.
+
+Options:
+  -h, --help            show this help message and exit
+  --targetdir=TARGETDIR
+                        Output directory (required)
+
+  Samba Common Options:
+    -s FILE, --configfile=FILE
+                        Configuration file
+    -d DEBUGLEVEL, --debuglevel=DEBUGLEVEL
+                        debug level
+    --option=OPTION     set smb.conf option from command line
+    --realm=REALM       set the realm name

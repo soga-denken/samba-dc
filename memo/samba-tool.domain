@@ -1,0 +1,236 @@
+-------------------------------------------------------------------------------------------------
+samba-tool domain --help
+[sudo] password for soga:
+Usage: samba-tool domain <subcommand>
+
+Domain management.
+
+
+Options:
+  -h, --help  show this help message and exit
+
+
+Available subcommands:
+  backup            - Create or restore a backup of the domain.
+  classicupgrade    - Upgrade from Samba classic (NT4-like) database to Samba AD DC database.
+  dcpromo           - Promote an existing domain member or NT4 PDC to an AD DC.
+  demote            - Demote ourselves from the role of Domain Controller.
+  exportkeytab      - Dump Kerberos keys of the domain into a keytab.
+  functionalprep    - Domain functional level preparation
+  info              - Print basic info about a domain and the DC passed as parameter.
+  join              - Join domain as either member or backup domain controller.
+  level             - Raise domain and forest function levels.
+  passwordsettings  - Manage password policy settings.
+  provision         - Provision a domain.
+  schemaupgrade     - Domain schema upgrading
+  tombstones        - Domain tombstone and recycled object management.
+  trust             - Domain and forest trust management.
+For more help on a specific subcommand, please type: samba-tool domain <subcommand> (-h|--help)
+
+-------------------------------------------------------------------------------------------------
+samba-tool domain functionalprep --help
+Usage: samba-tool domain functionalprep [options]
+
+Domain functional level preparation
+
+
+Options:
+  -h, --help            show this help message and exit
+  -H URL, --URL=URL     LDB URL for database or target server
+  -q, --quiet           Be quiet
+  -v, --verbose         Be verbose
+  --function-level=FUNCTION_LEVEL
+                        The schema file to upgrade to. Default is (Windows)
+                        2012_R2.
+  --forest-prep         Run the forest prep (by default, both the domain and
+                        forest prep are run).
+  --domain-prep         Run the domain prep (by default, both the domain and
+                        forest prep are run).
+
+  Credentials Options:
+    --simple-bind-dn=DN
+                        DN to use for a simple bind
+    --password=PASSWORD
+                        Password
+    -U USERNAME, --username=USERNAME
+                        Username
+    -W WORKGROUP, --workgroup=WORKGROUP
+                        Workgroup
+    -N, --no-pass       Don't ask for a password
+    -k KERBEROS, --kerberos=KERBEROS
+                        Use Kerberos
+    --ipaddress=IPADDRESS
+                        IP address of server
+    -P, --machine-pass  Use stored machine account password
+    --krb5-ccache=KRB5CCNAME
+                        Kerberos Credentials cache
+
+  Samba Common Options:
+    -s FILE, --configfile=FILE
+                        Configuration file
+    -d DEBUGLEVEL, --debuglevel=DEBUGLEVEL
+                        debug level
+    --option=OPTION     set smb.conf option from command line
+    --realm=REALM       set the realm name
+
+  Version Options:
+    -V, --version       Display version number
+    
+    samba-tool domain passwordsettings --help
+Usage: samba-tool domain passwordsettings <subcommand>
+
+Manage password policy settings.
+
+
+Options:
+  -h, --help  show this help message and exit
+
+-------------------------------------------------------------------------------------------------
+
+Available subcommands:
+  pso   - Manage fine-grained Password Settings Objects (PSOs).
+  set   - Set password settings.
+  show  - Display current password settings for the domain.
+For more help on a specific subcommand, please type: samba-tool domain passwordsettings <subcommand> (-h|--help)
+
+samba-tool domain passwordsettings pso --help
+Usage: samba-tool domain passwordsettings pso <subcommand>
+
+Manage fine-grained Password Settings Objects (PSOs).
+
+
+Options:
+  -h, --help  show this help message and exit
+
+-------------------------------------------------------------------------------------------------
+
+Available subcommands:
+  apply      - Applies a PSO's password policy to a user or group.
+  create     - Creates a new Password Settings Object (PSO).
+  delete     - Deletes a Password Settings Object (PSO).
+  list       - Lists all Password Settings Objects (PSOs).
+  set        - Modifies a Password Settings Object (PSO).
+  show       - Display a Password Settings Object's details.
+  show-user  - Displays the Password Settings that apply to a user.
+  unapply    - Updates a PSO to no longer apply to a user or group.
+For more help on a specific subcommand, please type: samba-tool domain passwordsettings pso <subcommand> (-h|--help)
+
+-------------------------------------------------------------------------------------------------
+
+samba-tool domain passwordsettings set --help
+Usage: samba-tool domain passwordsettings set <options> [options]
+
+Set password settings.
+
+Password complexity, password lockout policy, history length,
+minimum password length, the minimum and maximum password age) on
+a Samba AD DC server.
+
+Use against a Windows DC is possible, but group policy will override it.
+
+
+Options:
+  -h, --help            show this help message and exit
+  -H URL, --URL=URL     LDB URL for database or target server
+  -q, --quiet           Be quiet
+  --complexity=COMPLEXITY
+                        The password complexity (on | off | default). Default
+                        is 'on'
+  --store-plaintext=STORE_PLAINTEXT
+                        Store plaintext passwords where account have 'store
+                        passwords with reversible encryption' set (on | off |
+                        default). Default is 'off'
+  --history-length=HISTORY_LENGTH
+                        The password history length (<integer> | default).
+                        Default is 24.
+  --min-pwd-length=MIN_PWD_LENGTH
+                        The minimum password length (<integer> | default).
+                        Default is 7.
+  --min-pwd-age=MIN_PWD_AGE
+                        The minimum password age (<integer in days> |
+                        default).  Default is 1.
+  --max-pwd-age=MAX_PWD_AGE
+                        The maximum password age (<integer in days> |
+                        default).  Default is 43.
+  --account-lockout-duration=ACCOUNT_LOCKOUT_DURATION
+                        The the length of time an account is locked out after
+                        exeeding the limit on bad password attempts (<integer
+                        in mins> | default).  Default is 30 mins.
+  --account-lockout-threshold=ACCOUNT_LOCKOUT_THRESHOLD
+                        The number of bad password attempts allowed before
+                        locking out the account (<integer> | default).
+                        Default is 0 (never lock out).
+  --reset-account-lockout-after=RESET_ACCOUNT_LOCKOUT_AFTER
+                        After this time is elapsed, the recorded number of
+                        attempts restarts from zero (<integer> | default).
+                        Default is 30.
+
+  Credentials Options:
+    --simple-bind-dn=DN
+                        DN to use for a simple bind
+    --password=PASSWORD
+                        Password
+    -U USERNAME, --username=USERNAME
+                        Username
+    -W WORKGROUP, --workgroup=WORKGROUP
+                        Workgroup
+    -N, --no-pass       Don't ask for a password
+    -k KERBEROS, --kerberos=KERBEROS
+                        Use Kerberos
+    --ipaddress=IPADDRESS
+                        IP address of server
+    -P, --machine-pass  Use stored machine account password
+    --krb5-ccache=KRB5CCNAME
+                        Kerberos Credentials cache
+
+  Samba Common Options:
+    -s FILE, --configfile=FILE
+                        Configuration file
+    -d DEBUGLEVEL, --debuglevel=DEBUGLEVEL
+                        debug level
+    --option=OPTION     set smb.conf option from command line
+    --realm=REALM       set the realm name
+
+  Version Options:
+    -V, --version       Display version number
+    
+-------------------------------------------------------------------------------------------------
+
+samba-tool domain passwordsettings show --help
+Usage: samba-tool domain passwordsettings show [options]
+
+Display current password settings for the domain.
+
+
+Options:
+  -h, --help            show this help message and exit
+  -H URL, --URL=URL     LDB URL for database or target server
+
+  Credentials Options:
+    --simple-bind-dn=DN
+                        DN to use for a simple bind
+    --password=PASSWORD
+                        Password
+    -U USERNAME, --username=USERNAME
+                        Username
+    -W WORKGROUP, --workgroup=WORKGROUP
+                        Workgroup
+    -N, --no-pass       Don't ask for a password
+    -k KERBEROS, --kerberos=KERBEROS
+                        Use Kerberos
+    --ipaddress=IPADDRESS
+                        IP address of server
+    -P, --machine-pass  Use stored machine account password
+    --krb5-ccache=KRB5CCNAME
+                        Kerberos Credentials cache
+
+  Samba Common Options:
+    -s FILE, --configfile=FILE
+                        Configuration file
+    -d DEBUGLEVEL, --debuglevel=DEBUGLEVEL
+                        debug level
+    --option=OPTION     set smb.conf option from command line
+    --realm=REALM       set the realm name
+
+  Version Options:
+    -V, --version       Display version number
